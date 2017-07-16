@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import ua.edu.zsmu.mfi.biology.pollen.util.RemoteJSONDownloader;
 
@@ -20,17 +21,16 @@ public class WeatherHistoryDataProvider {
     private static final String DATE;
 
     private static final int DAY_OF_YEAR;
+    // DATE should be like "2017-05-23" because of API requirement
+    private static final String HISTORY_URL = "http://api.apixu.com/v1/history.json?key=" + APP_ID + "&q=" + CITY + "&dt=" + DATE;
 
     static {
         final Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         DATE = dateFormat.format(calendar.getTime());
         DAY_OF_YEAR = calendar.get(Calendar.DAY_OF_YEAR);
     }
-
-    // DATE should be like "2017-05-23" because of API requirement
-    private static final String HISTORY_URL = "http://api.apixu.com/v1/history.json?key="+APP_ID+"&q="+CITY+"&dt="+DATE;
 
     public String downloadWeatherJSON() throws Exception {
         return RemoteJSONDownloader.downloadJSON(HISTORY_URL);

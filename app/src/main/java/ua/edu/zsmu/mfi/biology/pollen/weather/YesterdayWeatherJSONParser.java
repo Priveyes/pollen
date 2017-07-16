@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Andrey on 25.05.2017.
@@ -54,6 +55,6 @@ public final class YesterdayWeatherJSONParser {
     }
 
     private Date convertDate(String date) throws ParseException {
-        return new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date);
+        return new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault()).parse(date);
     }
 }

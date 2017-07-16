@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import ua.edu.zsmu.mfi.biology.pollen.util.LocalFileDataProvider;
@@ -25,12 +26,10 @@ public final class NormalPollenConcentrationDataProvider {
                 .getJSONNormConcentrationFileContent(context);
         try {
             JSONObject jObject = new JSONObject(json);
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(jObject.getString("date"));
+            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(jObject.getString("date"));
             final JSONArray jsonData= jObject.getJSONArray("data");
             return new NormalConcentration(date, buildMap(jsonData));
-        } catch (JSONException e) {
-            Log.e("ERROR",e.getMessage());
-        } catch (ParseException e) {
+        } catch (JSONException | ParseException e) {
             Log.e("ERROR",e.getMessage());
         }
         throw new RuntimeException();

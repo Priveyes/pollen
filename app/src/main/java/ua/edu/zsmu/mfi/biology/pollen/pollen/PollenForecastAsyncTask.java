@@ -7,6 +7,7 @@ import android.widget.RemoteViews;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import ua.edu.zsmu.mfi.biology.pollen.view.WidgetView;
@@ -118,7 +119,7 @@ public class PollenForecastAsyncTask extends AsyncTask<String, Void, WeatherWrap
 
 
     private String getDate() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         format.setTimeZone(TimeZone.getTimeZone("EET"));
         return format.format(new Date());
     }

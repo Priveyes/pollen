@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.widget.RemoteViews;
 
+import java.util.Locale;
 import java.util.Map;
 
 import layout.PollenWidget;
@@ -34,28 +35,28 @@ public final class WidgetView {
     public void setForecast(Map<Integer, Pollen> forecast) {
         Pollen today = forecast.get(1);
         remoteViews.setTextViewText(R.id.today_level, "Рівень " + today.getLevel());
-        remoteViews.setTextViewText(R.id.today_value, String.format("%.1f", today.getValue())+" од.");
+        remoteViews.setTextViewText(R.id.today_value, String.format(Locale.getDefault(), "%.1f", today.getValue()) + " од.");
         remoteViews.setInt(R.id.today_container, "setBackgroundResource", getDrawable(today.getLevel()));
 
         if (forecast.containsKey(2)) {
             Pollen tomorrow = forecast.get(2);
             remoteViews.setTextViewText(R.id.tomorrow_level, "Рівень " + tomorrow.getLevel());
-            remoteViews.setTextViewText(R.id.tomorrow_value, String.format("%.1f", tomorrow.getValue())+" од.");
+            remoteViews.setTextViewText(R.id.tomorrow_value, String.format(Locale.getDefault(), "%.1f", tomorrow.getValue()) + " од.");
             remoteViews.setInt(R.id.tomorrow_container, "setBackgroundResource", getDrawable(tomorrow.getLevel()));
         } else {
             remoteViews.setTextViewText(R.id.tomorrow_level, "Рівень -");
-            remoteViews.setTextViewText(R.id.tomorrow_value, String.format("%.1f", "0 од."));
+            remoteViews.setTextViewText(R.id.tomorrow_value, String.format(Locale.getDefault(), "%.1f", "0 од."));
             remoteViews.setInt(R.id.tomorrow_container, "setBackgroundResource", getDrawable(0));
         }
 
         if (forecast.containsKey(3)) {
             Pollen after = forecast.get(3);
             remoteViews.setTextViewText(R.id.after_level, "Рівень " + after.getLevel());
-            remoteViews.setTextViewText(R.id.after_value, String.format("%.1f", after.getValue())+" од.");
+            remoteViews.setTextViewText(R.id.after_value, String.format(Locale.getDefault(), "%.1f", after.getValue()) + " од.");
             remoteViews.setInt(R.id.after_container, "setBackgroundResource", getDrawable(after.getLevel()));
         } else {
             remoteViews.setTextViewText(R.id.after_level, "Рівень -");
-            remoteViews.setTextViewText(R.id.after_value, String.format("%.1f", "0 од."));
+            remoteViews.setTextViewText(R.id.after_value, String.format(Locale.getDefault(), "%.1f", "0 од."));
             remoteViews.setInt(R.id.after_container, "setBackgroundResource", getDrawable(0));
         }
         update();
@@ -85,13 +86,18 @@ public final class WidgetView {
     public void setMode(String mode) {
         int color;
         String text;
-        if (mode.equals("off")) {
-            color = Color.RED;
-            text = "Demo";
-        } else if (mode.equals("on")) {
-            color = Color.GREEN;
-            text = "Real-time";
-        } else throw new RuntimeException();
+        switch (mode) {
+            case "off":
+                color = Color.RED;
+                text = "Demo";
+                break;
+            case "on":
+                color = Color.GREEN;
+                text = "Real-time";
+                break;
+            default:
+                throw new RuntimeException();
+        }
         remoteViews.setTextColor(R.id.appwidget_mode, color);
         remoteViews.setTextViewText(R.id.appwidget_mode, text);
         update();
