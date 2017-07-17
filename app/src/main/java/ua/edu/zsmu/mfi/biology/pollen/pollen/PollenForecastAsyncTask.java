@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+
+import ua.edu.zsmu.mfi.biology.pollen.R;
 import ua.edu.zsmu.mfi.biology.pollen.view.WidgetView;
 import ua.edu.zsmu.mfi.biology.pollen.weather.WeatherForecastDataProvider;
 import ua.edu.zsmu.mfi.biology.pollen.weather.WeatherHistoryDataProvider;
@@ -30,12 +32,15 @@ public class PollenForecastAsyncTask extends AsyncTask<String, Void, WeatherWrap
 
     private WeatherHistoryDataProvider weatherHistoryDataProvider;
 
+    private Context context;
+
     // private Exception exception;
 
     // https://stackoverflow.com/questions/14211755/how-to-gracefully-handle-exception-inside-asynctask-in-android
 
     public PollenForecastAsyncTask(RemoteViews remoteViews, Context context,
                                    NormalConcentration normalConcentration) {
+        this.context = context;
         this.normalConcentration = normalConcentration;
         this.widgetView = new WidgetView(context, remoteViews);
         this.weatherForecastDataProvider = new WeatherForecastDataProvider();
@@ -44,8 +49,8 @@ public class PollenForecastAsyncTask extends AsyncTask<String, Void, WeatherWrap
 
     @Override
     protected WeatherWrapper doInBackground(String... params) {
-        String forecast = null;
-        String history = null;
+        String forecast;
+        String history;
         try {
             widgetView.setMessage("Downloading forecast...");
             forecast = weatherForecastDataProvider.downloadWeatherJSON();
@@ -85,7 +90,7 @@ public class PollenForecastAsyncTask extends AsyncTask<String, Void, WeatherWrap
             Log.i("Calculated forecast", "Success! :"+forecast);
             widgetView.setForecast(forecast);
             widgetView.setMessage("Updated...");
-            widgetView.setUpdated("Востаннє оновлено: "+getDate());
+            widgetView.setUpdated(context.getString(R.string.update, getDate()));
         } catch (Exception e) {
             widgetView.setError("Failure processing data...");
             String err = (e.getMessage()==null)?"Failure processing data":e.getMessage();

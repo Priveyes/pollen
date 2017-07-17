@@ -1,6 +1,15 @@
 <resources>
-    <string name="app_name">pollen</string>
-    <string name="action_settings">Settings</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="app_name">Pollen</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+
+    <string name="level">Level %1$d</string>
+    <string name="unit">%1$f Unit</string>
+    <string name="update">Last Update: %1$s</string>
+    <string name="concentration">Concentration of pollen in the air of Zaporozhye city</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="after">After.</string>
+    <string name="volume">00 g/m³</string>
+    <string name="today">Today</string>
 </resources>

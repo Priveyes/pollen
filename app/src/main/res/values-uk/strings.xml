@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Пилок</string>
+    <string name="level">Рівень %1$d</string>
+    <string name="unit">%1$f од</string>
+    <string name="update">Востаннє оновлено: %1$s</string>
+    <string name="concentration">Концентрація пилку у повітрі м. Запоріжжя</string>
+    <string name="today">Сьогодні</string>
+    <string name="volume">00 з/м³</string>
+    <string name="tomorrow">Завтра</string>
+    <string name="after">Післязав.</string>
+</resources>

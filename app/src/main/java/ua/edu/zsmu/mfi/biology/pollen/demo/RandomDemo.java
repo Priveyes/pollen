@@ -1,5 +1,6 @@
 package ua.edu.zsmu.mfi.biology.pollen.demo;
 
+import android.content.Context;
 import android.widget.RemoteViews;
 
 import java.util.Random;
@@ -12,11 +13,11 @@ import ua.edu.zsmu.mfi.biology.pollen.R;
 
 public final class RandomDemo {
 
-    public void randomlyUpdate(RemoteViews views) {
+    public void randomlyUpdate(Context context, RemoteViews views) {
 
         Random rd = new Random();
         int level = rd.nextInt(5);
-        views.setTextViewText(R.id.today_level, "Рівень " + level);
+        views.setTextViewText(R.id.today_level, context.getString(R.string.level, level));
         try {
             views.setInt(R.id.today_container, "setBackgroundResource", getDrawable(level));
         } catch (Exception e) {
@@ -25,7 +26,7 @@ public final class RandomDemo {
         }
 
         level = rd.nextInt(5);
-        views.setTextViewText(R.id.tomorrow_level, "Рівень " + level);
+        views.setTextViewText(R.id.tomorrow_level, context.getString(R.string.level, level));
         try {
             views.setInt(R.id.tomorrow_container, "setBackgroundResource", getDrawable(level));
         } catch (Exception e) {
@@ -34,14 +35,13 @@ public final class RandomDemo {
         }
 
         level = rd.nextInt(5);
-        views.setTextViewText(R.id.after_level, "Рівень " + level);
+        views.setTextViewText(R.id.after_level, context.getString(R.string.level, level));
         try {
             views.setInt(R.id.after_container, "setBackgroundResource", getDrawable(level));
         } catch (Exception e) {
             e.printStackTrace();
             views.setInt(R.id.after_container, "setBackgroundResource", R.drawable.danger_1);
         }
-
     }
 
     private int getDrawable(int level) {
@@ -59,5 +59,4 @@ public final class RandomDemo {
         }
         throw new RuntimeException();
     }
-
 }

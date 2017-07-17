@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pollen</string>
+    <string name="level">Niveau %1$d</string>
+    <string name="unit">%1$f Unit</string>
+    <string name="update">Mis à jour: %1$s</string>
+    <string name="tomorrow">Demain</string>
+    <string name="after">Ensuite.</string>
+    <string name="today">Maintenant</string>
+    <string name="volume">00 g/m³</string>
+    <string name="concentration">Concentration de pollen dans l\'air à %1$s</string>
+</resources>

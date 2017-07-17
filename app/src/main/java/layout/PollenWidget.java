@@ -31,6 +31,12 @@ public class PollenWidget extends AppWidgetProvider {
         startWidget(context);
     }
 
+    /**
+     * Frequent alarms are bad for battery life. As of API 22, the AlarmManager will override near-future and high-frequency alarm requests,
+     * delaying the alarm at least 5 seconds into the future and ensuring that the repeat interval is at least 60 seconds.
+     *
+     * @param context
+     */
     // Enter relevant functionality for when the first widget is created
     private void startWidget(Context context) {
         NormalPollenConcentrationDataProvider provider = new NormalPollenConcentrationDataProvider();
@@ -38,7 +44,7 @@ public class PollenWidget extends AppWidgetProvider {
         this.normalConcentrationStorage = provider.getDataFromLocalFile(context);
         Log.i("normal:", this.normalConcentrationStorage.toString());
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, 0, REPEAT,
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, 5000, REPEAT,
                 getPendingSelfIntent(context, UPD_CLICKED));
     }
 

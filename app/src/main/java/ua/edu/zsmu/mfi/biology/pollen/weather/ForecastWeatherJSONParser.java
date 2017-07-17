@@ -17,12 +17,12 @@ public final class ForecastWeatherJSONParser {
     public static final double MM_OF_MERCURY_CONST = 0.750061561303;
 
     /**
-     * Gets weather data for 5 days, multiple weather data per day
-     * @param json
-     * @return
-     * @throws JSONException
+     * ,
+     * @param json Gets weather data for 5 days
+     * @return multiple weather data per day
+     * @throws JSONException problem with the JSON API
      */
-    public List<Weather> parseWeatherData(String json) throws JSONException{
+    public List<Weather> parseWeatherData(String json) throws JSONException {
         List<Weather> weather = new ArrayList<>();
         JSONObject jsonObject = new JSONObject(json);
         JSONArray list = jsonObject.getJSONArray("list");
